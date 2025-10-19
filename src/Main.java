@@ -5,10 +5,11 @@ public class Main {
     static Scanner sc=new Scanner(System.in);
     static int cityCount=0;
     static String[]cities=new String[30];
+    static int[][]cityDistance=new int[30][30];
 
     public static void main(String[] args) {
 
-        //System.out.println("Hello from Logistics Management System!");
+        //System.out.println("Hello from Logistics Management System!"); this was just used as the 1st commit
 
         System.out.printf("======================================================%n");
         System.out.printf("LOGISTIC MANAGEMENT SYSTEM%n");
@@ -36,7 +37,7 @@ public class Main {
                     break;
 
                 case 2:
-                    distanceManagemnet();
+                    distanceManagement();
                     break;
 
                 case 3:
@@ -64,13 +65,13 @@ public class Main {
 
         int subChoice1;
         do {
-            System.out.println("\nselected City Management\n");
+            System.out.println("\t\t\t\n1)City Management\n");
             System.out.println("\t\n------------------ 1)MENU-------------------");
-            System.out.println("\t1.Display All Cities");
-            System.out.println("\t2.Add A New City");
-            System.out.println("\t3.Rename An Existing City");
-            System.out.println("\t4.Remove An Existing City");
-            System.out.println("\t5.Back To The Main Menu");
+            System.out.println("1.1.Display All Cities");
+            System.out.println("1.2.Add A New City");
+            System.out.println("1.3.Rename An Existing City");
+            System.out.println("1.4.Remove An Existing City");
+            System.out.println("1.5.Back To The Main Menu");
 
             System.out.println("\t\nEnter Your Choice: ");
             subChoice1 = sc.nextInt();
@@ -167,8 +168,77 @@ public class Main {
         System.out.println("City removed successfully!");
     }
     //2.0
-    public static void distanceManagemnet(){
+    public static void distanceManagement() {
+        int subchoice;
+        do {
+            System.out.println("\n\t\t\t2)DISTANCE MANAGEMENT\n");
+            System.out.println("\t\n------------------ MENU-------------------");
+            System.out.println("2.1.Input Or Edit Distance Between Two Cities");
+            System.out.println("2.2.View Distance Table");
+            System.out.println("2.3.Back To The Main Menu\n");
 
+            System.out.println("Enter Your Choice: ");
+            subchoice = sc.nextInt();
+            sc.nextLine();
+
+            switch (subchoice) {
+                case 1:
+                    enterOrEditDistance();
+                    break;
+                case 2:
+                    distanceTable();
+                    break;
+
+            }
+
+        } while (subchoice != 3);
+    }
+        //2.1.input or edit distance between two cities
+        public static void enterOrEditDistance () {
+            displayCity();
+            System.out.println();
+
+            System.out.println("Entering Index Of The Starting city: ");
+            System.out.println("From: ");
+            int startingIndex = sc.nextInt() - 1;
+
+            System.out.println("Entering Index Of The destination");
+            System.out.println("To: ");
+            int destinationIndex = sc.nextInt() - 1;
+
+            if (startingIndex == destinationIndex) {
+                System.out.println("Distance From a City To Itself is always 0 ");
+            }
+            if (startingIndex >= cityCount || destinationIndex >= cityCount) {
+                System.out.println("City Index Is Invalid!!!Check Again...");
+            }
+            System.out.println("Enter Distance(in km): ");
+            int distance = sc.nextInt();
+
+            cityDistance[startingIndex][destinationIndex] = distance;
+            cityDistance[destinationIndex][startingIndex] = distance;
+            System.out.println("Distance Updated Successfully!!!");
+
+        }
+        //2.2.view distance table
+        public static void distanceTable () {
+
+        if(cityCount==0){
+            System.out.println("No Cities Are Available...");
+        }
+        System.out.printf("%nDISTANCE TABLE%n");
+        for(int i=0;i<cityCount;i++){
+            System.out.printf("%-10s",cities[i]);
+        }
+            System.out.println();
+
+        for(int i=0;i<cityCount;i++){
+            System.out.printf("%-8s",cities[i]);
+            for(int j=0;j<cityCount;j++){
+                System.out.printf("%-10d",cityDistance[i][j]);
+            }
+            System.out.println();
+        }
     }
     }
 
