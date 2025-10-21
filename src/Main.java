@@ -3,9 +3,18 @@ import java.util.Scanner;
 public class Main {
 
     static Scanner sc=new Scanner(System.in);
+
     static int cityCount=0;
+
     static String[]cities=new String[30];
+
     static int[][]cityDistance=new int[30][30];
+
+    static String[]vehicleTypes={"Van","Truck","Lorry"};
+    static int[]vehicleCapacity={1000,5000,10000};
+    static int[]ratePerKm={30,40,80};  //LKR
+    static int[]avgSpeed={60,50,45};  //(km/h)
+    static int[]fuelEfficiency={12,6,4}; //(km/l)
 
     public static void main(String[] args) {
 
@@ -41,7 +50,7 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Selected vehicle Management............");
+                    vehicleManagement();
                     break;
 
                 case 4:
@@ -58,7 +67,7 @@ public class Main {
                 default:
                     System.out.println("Invalid input!!!Please Try Again...");
             }
-        }while(choice!=5);
+        }while(choice!=6);
     }
     //1.0
     public static void cityManagement(){
@@ -99,7 +108,7 @@ public class Main {
         }while(subChoice1!=5);
     }
 
-    //1.1 Displaying all cities
+    //1.1 Displaying all citiess
     public static void displayCity(){
         if (cityCount == 0) {
             System.out.println("No cities available.");
@@ -167,7 +176,7 @@ public class Main {
         cityCount--;
         System.out.println("City removed successfully!");
     }
-    //2.0
+    //2.0 distance managmnet
     public static void distanceManagement() {
         int subchoice;
         do {
@@ -188,6 +197,10 @@ public class Main {
                 case 2:
                     distanceTable();
                     break;
+                case 3:
+                    System.out.println("Returning Back To The Main Menu....");
+                default:
+                    System.out.println("Invalid Choice!!!");
 
             }
 
@@ -240,6 +253,45 @@ public class Main {
             System.out.println();
         }
     }
+    //3.0 vehicle management
+    public static void vehicleManagement() {
+        int subChoice;
+        do {
+            System.out.println("\n\t\t\t3)VEHICLE MANAGEMENT");
+            System.out.println("\t\n------------------ MENU-------------------");
+            System.out.println("\n1.Display All Vehicle Types");
+            System.out.println("2.Back To Main Menu");
+
+            System.out.println("\nEnter Your Choice: ");
+            subChoice=sc.nextInt();
+            sc.nextLine();
+
+            switch (subChoice) {
+                case 1:
+                    displayVehicles();
+                    break;
+                case 2:
+                    System.out.println("Returning Back To The Main Menu...");
+                    break;
+                default:
+                    System.out.println("Invalid Choice!!!");
+            }
+        }while (subChoice!=2);
     }
+
+    //3.1 display all vehicle types
+    public static void displayVehicles(){
+        System.out.println("\n--------------------VEHICLE TYPES----------------------\n");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %n","| Type |","| Capacity(kg) |","| Rate Per km(LKR) |","| Avg Speed(km/h) |","| Fuel Efficiency(km/l) |");
+        for(int i=0;i<vehicleTypes.length;i++){
+            System.out.printf("%-10s %-10d %-10d %-10d %-10d",vehicleTypes[i],vehicleCapacity[i],ratePerKm[i],avgSpeed[i],fuelEfficiency[i]);
+            System.out.println();
+        }
+
+    }
+
+
+    }
+
 
 
