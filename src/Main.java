@@ -54,7 +54,7 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.println("Selected Delivery Request Handling........");
+                    deliveryHandling();
                     break;
 
                 case 5:
@@ -63,6 +63,7 @@ public class Main {
 
                 case 6:
                     System.out.println("Exiting...................");
+                    break;
 
                 default:
                     System.out.println("Invalid input!!!Please Try Again...");
@@ -76,11 +77,11 @@ public class Main {
         do {
             System.out.println("\t\t\t\n1)City Management\n");
             System.out.println("\t\n------------------ 1)MENU-------------------");
-            System.out.println("1.1.Display All Cities");
-            System.out.println("1.2.Add A New City");
-            System.out.println("1.3.Rename An Existing City");
-            System.out.println("1.4.Remove An Existing City");
-            System.out.println("1.5.Back To The Main Menu");
+            System.out.println("1.Display All Cities");
+            System.out.println("2.Add A New City");
+            System.out.println("3.Rename An Existing City");
+            System.out.println("4.Remove An Existing City");
+            System.out.println("5.Back To The Main Menu");
 
             System.out.println("\t\nEnter Your Choice: ");
             subChoice1 = sc.nextInt();
@@ -123,7 +124,7 @@ public class Main {
     //1.2.adding new cities
     public static void addCity(){
 
-        if(cityCount>cities.length){
+        if(cityCount>=cities.length){
            System.out.println("City limit is reached..can not add more!!");
            return;
        }
@@ -146,7 +147,7 @@ public class Main {
         int cityIndex=sc.nextInt()-1;
         sc.nextLine();
 
-        if(cityIndex>cityCount){
+        if(cityIndex>=cityCount){
             System.out.println("Entered City Index Is Incorrect!!! Check Again..");
             return;
         }
@@ -166,7 +167,7 @@ public class Main {
         int cityIndex=sc.nextInt()-1;
         sc.nextLine();
 
-        if(cityIndex>cityCount){
+        if(cityIndex>=cityCount){
             System.out.println("Entered City Index Is Incorrect!!! Check Again..");
             return;
         }
@@ -182,9 +183,9 @@ public class Main {
         do {
             System.out.println("\n\t\t\t2)DISTANCE MANAGEMENT\n");
             System.out.println("\t\n------------------ MENU-------------------");
-            System.out.println("2.1.Input Or Edit Distance Between Two Cities");
-            System.out.println("2.2.View Distance Table");
-            System.out.println("2.3.Back To The Main Menu\n");
+            System.out.println("1.Input Or Edit Distance Between Two Cities");
+            System.out.println("2.View Distance Table");
+            System.out.println("3.Back To The Main Menu\n");
 
             System.out.println("Enter Your Choice: ");
             subchoice = sc.nextInt();
@@ -199,6 +200,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Returning Back To The Main Menu....");
+                    break;
                 default:
                     System.out.println("Invalid Choice!!!");
 
@@ -224,6 +226,7 @@ public class Main {
             }
             if (startingIndex >= cityCount || destinationIndex >= cityCount) {
                 System.out.println("City Index Is Invalid!!!Check Again...");
+                return;
             }
             System.out.println("Enter Distance(in km): ");
             int distance = sc.nextInt();
@@ -288,6 +291,81 @@ public class Main {
             System.out.println();
         }
 
+    }
+    //4.0 delivery request handling
+    public static void deliveryHandling() {
+
+        int subChoice;
+        do {
+            System.out.println("\n\t\t\t4)DELIVERY REQUEST HANDLING");
+            System.out.println("\t\n------------------ MENU-------------------");
+            System.out.println("1.Display Distance Table");
+            System.out.println("2.Request A Delivery");
+            System.out.println("3.Back to Main Menu");
+
+            System.out.println("\n Enter Your Choice: ");
+            subChoice=sc.nextInt();
+
+            switch(subChoice) {
+                case 1:
+                    displayCity();
+                    break;
+                case 2:
+                    deliveryRequest();
+                    break;
+                case 3:
+                    System.out.println("Returning Back To The Main Menu...");
+                default:
+                    System.out.println("Invalid Choice!!!");
+            }
+
+        }while(subChoice!=3);
+
+        //4.2.handling a delivery request
+    }
+    public static void deliveryRequest(){
+        System.out.println("Enter The Index Of The Starting City: ");
+        int startingIndex=sc.nextInt()-1;
+
+        System.out.println("Enter The Index Of The Destination City: ");
+        int destinationIndex=sc.nextInt()-1;
+
+        if(startingIndex==destinationIndex){
+            System.out.println("Starting City and Destination City Can Not Be The Same");
+        }
+        if(startingIndex>=cityCount||destinationIndex>=cityCount){
+            System.out.println("Invalid Choice!!!Check Again...");
+        }
+
+        System.out.println("Enter The Weight Of The Package(Kg): ");
+        double weight=sc.nextDouble();
+
+        displayVehicles();
+        System.out.println("Select The Vehicle Type From The Table(1=Van, 2=Truck, 3=Lorry): ");
+        int vehicleIndex=sc.nextInt()-1;
+
+        if(vehicleIndex>=vehicleTypes.length){
+            System.out.println("Invalid Choice!!!Check Again...");
+            return;
+        }
+
+        //4.2.1.weighth validating
+        if(weight>vehicleCapacity[vehicleIndex]){
+            System.out.println("Weight Can Not Exceed The Capacity!!!");
+        }
+
+        //4.2.2.distance
+        int distance=cityDistance[startingIndex][destinationIndex];
+
+        //4.2.3. confirming the customer that the order request has accepted
+        System.out.println("\n Your Delivery Requested Was Successful");
+        System.out.println("From: "+cities[startingIndex]);
+        System.out.println("To: "+cities[destinationIndex]);
+        System.out.println("Vehicle Type: "+vehicleTypes[vehicleIndex]);
+        System.out.println("Total Distance(km) :"+distance+" km ");
+        System.out.println("Weight Of The Package(Kg): "+weight+" kg");
+
+        System.out.println("\n Make Sure That All The Details Of Your Delivery Is Correct...");
     }
 
 
