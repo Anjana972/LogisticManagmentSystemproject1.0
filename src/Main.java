@@ -58,7 +58,7 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.println("Selected Reports.......");
+                    //System.out.println();
                     break;
 
                 case 6:
@@ -109,7 +109,7 @@ public class Main {
         }while(subChoice1!=5);
     }
 
-    //1.1 Displaying all citiess
+    //1.1 Displaying all cities
     public static void displayCity(){
         if (cityCount == 0) {
             System.out.println("No cities available.");
@@ -366,10 +366,52 @@ public class Main {
         System.out.println("Weight Of The Package(Kg): "+weight+" kg");
 
         System.out.println("\n Make Sure That All The Details Of Your Delivery Is Correct...");
-    }
+
+        //calling the delivery cost calculating method
+        calculateDeliveryCost(startingIndex,destinationIndex,weight,vehicleIndex);
 
 
     }
+    //5.0 Cost,Time,Fuel Calculations
+    public static void calculateDeliveryCost(int startingIndex,int destinationIndex,double weight,int vehicleIndex){
+        int D=cityDistance[startingIndex][destinationIndex];    //Distance D (from distance matrix)-km
+        double fuelPrice=310.0;  //LKR per litere
+        int R=ratePerKm[vehicleIndex];   //Rate per km R (from vehicle type)-LKR
+        int S=avgSpeed[vehicleIndex];   //average speed-(km/h)
+        int E=fuelEfficiency[vehicleIndex];  //fuel efficiency(km/l)
+
+        //calculations
+        double cost = D * R * (1 + (weight / 10000.0));
+        double time = (double) D / S;
+        double fuelUsed = (double) D / E;
+        double fuelCost = fuelUsed * fuelPrice;
+        double totalCost = cost + fuelCost;
+        double profit = cost * 0.25;
+        double customerCharge = totalCost + profit;
+
+        //Displaying the  Results to the customer
+        System.out.println("======================================================");
+        System.out.println("\t\tDELIVERY COST ESTIMATION\n");
+        System.out.println("------------------------------------------------------\n");
+
+        System.out.println("From "+cities[startingIndex]);
+        System.out.println("To :"+cities[destinationIndex]);
+        System.out.println("Distance "+D+" km");
+        System.out.println("Selected Vehicle: "+vehicleTypes[vehicleIndex]);
+        System.out.println("Weight : "+weight+" km");
+        System.out.println("------------------------------------------------------\n");
+
+        System.out.printf("Base Cost: %.3f LKR%n ",cost);
+        System.out.printf("Fuel Used: %.3f L%n",fuelUsed);
+        System.out.printf("Fuel Cost: %.3f LKR%n",fuelCost);
+        System.out.printf("Operational Cost: %.3f LKR%n",totalCost);
+        System.out.printf("Profit: %.3f LKR%n",profit);
+        System.out.printf("Customer Charge: %.3f LKR%n",customerCharge);
+        System.out.printf("Estimated Time: %.2f hourse%n",time);
+        System.out.println("======================================================\n");
+
+    }
+}
 
 
 
