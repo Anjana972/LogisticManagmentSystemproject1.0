@@ -58,7 +58,23 @@ public class Main {
                     break;
 
                 case 5:
-                    //System.out.println();
+                    displayCity();
+
+                    System.out.println("Enter Starting City Index: ");
+                    int s=sc.nextInt()-1;
+
+                    System.out.println("Enter the Index Of The destination: ");
+                    int d=sc.nextInt()-1;
+
+                    System.out.println("Enter Package Weight(kg): ");
+                    double w=sc.nextDouble();
+
+                    displayVehicles();
+                    System.out.println("Select The Vehicle Type: ");
+                    int v=sc.nextInt();
+
+                    calculateDeliveryCost(s,d,w,v);
+
                     break;
 
                 case 6:
