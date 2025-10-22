@@ -16,6 +16,19 @@ public class Main {
     static int[]avgSpeed={60,50,45};  //(km/h)
     static int[]fuelEfficiency={12,6,4}; //(km/l)
 
+    //for delivery records
+    static String[]deliveryFrom=new String[50];
+    static String[]deliveryTo=new String[50];
+    static String[]deliveryVehicles=new String[50];
+    static int[]deliveryDistance=new int[50];
+    static double[]deliveryWeight=new double[50];
+    static double[]deliveryCost=new double[50];
+    static double[]deliveryProfit=new double[50];
+    static double[]deliveryCharge=new double[50];
+    static double[]deliveryTime=new double[50];
+    static int deliveryCount;
+
+
     public static void main(String[] args) {
 
         //System.out.println("Hello from Logistics Management System!"); this was just used as the 1st commit
@@ -33,8 +46,9 @@ public class Main {
             System.out.println("2)Distance Management");
             System.out.println("3)Vehicle Management");
             System.out.println("4)Delivery Request Handling");
-            System.out.println("5)Reports (Cost,Fuel calculations)");
-            System.out.println("6)Exit");
+            System.out.println("5)Calculations(Cost,Fuel,time)");
+            System.out.println("6)View All Saved Deliveries");
+            System.out.println("7)Exit");
             System.out.println();
 
             System.out.println("Enter your choice: ");
@@ -84,7 +98,7 @@ public class Main {
                 default:
                     System.out.println("Invalid input!!!Please Try Again...");
             }
-        }while(choice!=6);
+        }while(choice!=7);
     }
     //1.0
     public static void cityManagement(){
@@ -426,7 +440,26 @@ public class Main {
         System.out.printf("Estimated Time: %.2f hourse%n",time);
         System.out.println("======================================================\n");
 
+        //saving delivery records
+        if(deliveryCount<deliveryFrom.length){
+           deliveryFrom[deliveryCount]=cities[startingIndex];
+           deliveryTo[deliveryCount]=cities[destinationIndex];
+           deliveryVehicles[deliveryCount]=vehicleTypes[vehicleIndex];
+           deliveryDistance[deliveryCount]=D;
+           deliveryWeight[deliveryCount]=weight;
+           deliveryCost[deliveryCount]=totalCost;
+           deliveryProfit[deliveryCount]=profit;
+           deliveryCharge[deliveryCount]=customerCharge;
+           deliveryTime[deliveryCount]=time;
+           deliveryCount++;
+
+            System.out.println("Your Delivery Record Saved Successfully... ");
+        }else{
+            System.out.println("Delivery Record Limit Reached!!!Can not Add More...");
+        }
+
     }
+
 }
 
 
