@@ -92,7 +92,7 @@ public class Main {
                     break;
 
                 case 6:
-                    System.out.println("Exiting...................");
+                    savedDeliveries();
                     break;
 
                 default:
@@ -457,7 +457,23 @@ public class Main {
         }else{
             System.out.println("Delivery Record Limit Reached!!!Can not Add More...");
         }
-
+    }
+    //6.0 viewing saved reports
+    public static void savedDeliveries(){
+        if(deliveryCount==0){
+            System.out.println("No Deliveries have Been Recorded Yet...");
+            return;
+        }
+        System.out.println("\n------------------------ALL DELIVERIES-----------------------------\n");
+        for(int i=0;i<deliveryCount;i++){
+            System.out.println("Delivery: "+(i+1));
+            System.out.println("From: "+deliveryFrom[i]);
+            System.out.println("To :"+deliveryTo[i]);
+            System.out.println("Delivery Vehicle: "+vehicleTypes[i]);
+            System.out.println("Weight: "+deliveryWeight[i]+"kg");
+            System.out.println("Distance: "+deliveryDistance[i]+" km");
+        }
+        System.out.println("Total Deliveries: "+deliveryCount);
     }
 
 }
