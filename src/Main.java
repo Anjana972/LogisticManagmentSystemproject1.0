@@ -6,6 +6,8 @@
  * Description : A Java console-based logistics management  system
  */
 
+//finalized project
+
 import java.util.Scanner;
 import java.io.*;   //.io package used in programs enabling it to interact with external data resources such as files
 
