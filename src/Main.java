@@ -39,7 +39,7 @@ public class Main {
 
         System.out.printf("======================================================%n");
         System.out.printf("LOGISTIC MANAGEMENT SYSTEM%n");
-        System.out.println();
+        System.out.printf("======================================================%n");
         System.out.println("------------------------MAIN MENU-----------------------------");
 
         int choice;
@@ -106,7 +106,12 @@ public class Main {
 
                 case 8:
                     fileHandlingSection();
-                    System.out.println("Exiting.....");
+
+                    System.out.println("\n==============================================");
+                    System.out.println("Exiting..................");
+                    System.out.println(" Thank you for using the Logistics Management System!");
+                    System.out.println(" All data saved successfully. Goodbye....");
+                    System.out.println("==============================================\n");
                     break;
 
                 default:
