@@ -30,7 +30,6 @@ public class Main {
     static double[] deliveryTime = new double[50];
     static int deliveryCount;
 
-
     public static void main(String[] args) {
 
         loadDataFromFile();
@@ -407,7 +406,7 @@ public class Main {
             return;
         }
 
-        //4.2.1.weighth validating
+        //4.2.1.weight validating
         if (weight > vehicleCapacity[vehicleIndex]) {
             System.out.println("Weight Can Not Exceed The Capacity!!!");
         }
