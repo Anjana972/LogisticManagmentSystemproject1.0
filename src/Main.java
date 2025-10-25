@@ -47,8 +47,9 @@ public class Main {
             System.out.println("3)Vehicle Management");
             System.out.println("4)Delivery Request Handling");
             System.out.println("5)Calculations(Cost,Fuel,time)");
-            System.out.println("6)View All Saved Deliveries");
-            System.out.println("7)Exit");
+            System.out.println("6)View Delivery History");
+            System.out.println("7)Summary Report");
+            System.out.println("8)Exit");
             System.out.println();
 
             System.out.println("Enter your choice: ");
@@ -95,10 +96,18 @@ public class Main {
                     savedDeliveries();
                     break;
 
+                case 7:
+                    summaryReport();
+                    break;
+
+                case 8:
+                    System.out.println("Exiting.....");
+                    break;
+
                 default:
                     System.out.println("Invalid input!!!Please Try Again...");
             }
-        }while(choice!=7);
+        }while(choice!=8);
     }
     //1.0
     public static void cityManagement(){
@@ -475,7 +484,75 @@ public class Main {
         }
         System.out.println("Total Deliveries: "+deliveryCount);
     }
+    //7.0 summary
+    public static void summaryReport() {
+        int subChoice;
+        do {
+            System.out.println("\n\t\t\t7)REPORTS");
+            System.out.println("\t\n------------------ MENU-------------------");
+            System.out.println("1.View Summary");
+            System.out.println("2.Back To Main Menu\n");
 
+            System.out.println("Enter Your choice: ");
+            subChoice=sc.nextInt();
+            sc.nextLine();
+
+            switch (subChoice){
+                case 1:
+                    displaySummaryReports();
+                    break;
+                case 2:
+                    System.out.println("REtuning To The Main Menu...");
+                    break;
+                default:
+                    System.out.println("Invalid Choice!!!");
+            }
+
+        } while (subChoice != 2);
+    }
+    //7.1. displaying summary reports
+    public static void displaySummaryReports(){
+        if(deliveryCount==0){
+            System.out.println("\n No Deliveries Recorded Yet...");
+            return;
+        }
+        double totalDistance=0;
+        double totalProfit=0;
+        double totalRevenue=0;
+        double totalTime=0;
+
+        int longestRoute=deliveryDistance[0];
+        int shortestRoute=deliveryDistance[0];
+
+        for(int i=0;i<deliveryCount;i++){
+            totalDistance+=deliveryDistance[i];
+            totalProfit+=deliveryProfit[i];
+            totalRevenue+=deliveryCharge[i];
+            totalTime+=deliveryTime[i];
+
+            if(deliveryDistance[i]>longestRoute){
+                longestRoute=deliveryDistance[i];
+            }
+
+            if(deliveryDistance[i]<shortestRoute){
+                shortestRoute=deliveryDistance[i];
+            }
+
+            double averageTime=totalTime/deliveryCount;
+
+            System.out.println("\n------------------------SUMMARY REPORTS-----------------------------\n");
+            System.out.printf("%-20s:%d%n","Total Deliveries",deliveryCount);
+            System.out.printf("%-20s: %.2f km%n","Total Distance",totalDistance);
+            System.out.printf("%-20s: %.2f hours%n","Average Time",averageTime);
+            System.out.printf("%-20s: %.2f LKR%n","Total Profit",totalProfit);
+            System.out.printf("%-20s: %.2f LKR%n","Total Revenue",totalRevenue);
+            System.out.printf("%-20s: %d km%n","Longest Delivery Route",longestRoute);
+            System.out.printf("%-20s: %d km%n","Shortest Delivery Route",shortestRoute);
+
+            System.out.println("\n------------------------end of the report-----------------------------\n");
+        }
+
+    }
 }
 
 
