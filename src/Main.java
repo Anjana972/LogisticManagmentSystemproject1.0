@@ -1,6 +1,13 @@
+/*
+ * ICT 1011 – Computer Programming Assignment
+ * Project : Logistics Management System
+ * Student : SJA Kamburugamuwa
+ * Index No: AS20240972
+ * Description : A Java console-based logistics management  system
+ */
+
 import java.util.Scanner;
 import java.io.*;   //.io package used in programs enabling it to interact with external data resources such as files
-
 
 public class Main {
 
@@ -297,15 +304,16 @@ public class Main {
             System.out.println("No Cities Are Available...");
         }
         System.out.printf("%nDISTANCE TABLE%n");
+        System.out.printf("%-15s","");//empty corner row
         for (int i = 0; i < cityCount; i++) {
-            System.out.printf("%-10s", cities[i]);
+            System.out.printf("%-15s", cities[i]);
         }
         System.out.println();
 
         for (int i = 0; i < cityCount; i++) {
-            System.out.printf("%-8s", cities[i]);
+            System.out.printf("%-15s", cities[i]);
             for (int j = 0; j < cityCount; j++) {
-                System.out.printf("%-10d", cityDistance[i][j]);
+                System.out.printf("%-15d", cityDistance[i][j]);
             }
             System.out.println();
         }
